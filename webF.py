@@ -40,6 +40,9 @@ def invokeOperationXtimes(times):
         adder += 1
         saveUserInfo()
         print("records saved: "+str(adder))
+        if adder == interationTimes:
+            print("Finshed! Go check users.txt to see generated records");
+            driver.quit()
 
 if startProgram == True:
     invokeOperationXtimes(10)
