@@ -7,6 +7,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 names = []
 emails = []
+PhoneNumber = []
+address = []
 startProgram = True
 
 driver = webdriver.Firefox()
@@ -17,12 +19,25 @@ def main():
      for i in range(len(names)):
          f.write("Name: "+names[i]+'\n')
          f.write("Email: "+emails[i]+'\n')
+         f.write(PhoneNumber[i]+'\n')
+         f.write("Address: "+address[i]+'\n')
          f.write("======================="+'\n')
      f.close()
+
+
+def generateFakePhoneNumber():
+    areaCode = "786"
+    randomNumbers = str(random())
+    fakeNumber = "PhoneNumber: "+areaCode+"-"+randomNumbers[-3:]+"-"+randomNumbers[3:7]
+    return fakeNumber
+
 
 def saveUserInfo():
     userInfo = driver.find_element_by_tag_name('h3')
     names.append(userInfo.text)
+    PhoneNumber.append(generateFakePhoneNumber())
+    addressToSend = "1 1 4 69 North W... 34th ST"
+    address.append(addressToSend)
     nameParse = str(userInfo.text).replace(" ", "")
     randomNumbers = str(random())
     endingGmail = "@gmail.com"
@@ -41,7 +56,7 @@ def invokeOperationXtimes(times):
         saveUserInfo()
         print("records saved: "+str(adder))
         if adder == interationTimes:
-            print("Finshed! Go check users.txt to see generated records");
+            print("Finshed! Go check users.txt to see generated records")
             driver.quit()
 
 if startProgram == True:
